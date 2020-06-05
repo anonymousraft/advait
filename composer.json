@@ -1,0 +1,19 @@
+{
+    "name": "hitendra/advait",
+    "description": "All in one plugin from Quatervois Inc to enable its client to do more with WordPress.",
+    "type": "project",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Hitendra Rathore",
+            "email": "hitendra@quatervois.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4": {
+          "Inc\\":"./inc"
+        }
+    }
+}
