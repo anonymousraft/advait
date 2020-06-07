@@ -9,7 +9,7 @@ use \Inc\Base\BaseController;
 use \Inc\Api\Callbacks\AdminCallbacks;
 use \Inc\Api\Callbacks\ManagerCallbacks;
 
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
 	public $settings;
 
@@ -19,7 +19,7 @@ class Admin extends BaseController
 
 	public $pages = array();
 
-	public $subpages = array();
+	//public $subpages = array();
 
 
 	public function register()
@@ -32,7 +32,7 @@ class Admin extends BaseController
 
 		$this->setPages();
 
-		$this->setSubages();
+		//$this->setSubages();
 
 		$this->setSettings();
 
@@ -40,7 +40,7 @@ class Admin extends BaseController
 
 		$this->setFields();
 
-		$this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages( $this->subpages)->register();
+		$this->settings->addPages($this->pages)->withSubPage('Dashboard')->register();
 	}
 
 	public function setPages()
@@ -58,55 +58,52 @@ class Admin extends BaseController
 		];
 	}
 
-	public function setSubages()
-	{
+	// public function setSubages()
+	// {
 
 
-		$this->subpages = [
-			[
-				'parent_slug' => 'advait_plugin',
-				'page_title' => 'Custom Post Types',
-				'menu_title' => 'CPT Manager',
-				'capability' => 'manage_options',
-				'menu_slug'  => 'advait_cpt',
-				'callback'   => [$this->callbacks, 'adminCpt']
-			],
+	// 	$this->subpages = [
+	// 		[
+	// 			'parent_slug' => 'advait_plugin',
+	// 			'page_title' => 'Custom Post Types',
+	// 			'menu_title' => 'CPT Manager',
+	// 			'capability' => 'manage_options',
+	// 			'menu_slug'  => 'advait_cpt',
+	// 			'callback'   => [$this->callbacks, 'adminCpt']
+	// 		],
 
-			[
-				'parent_slug' => 'advait_plugin',
-				'page_title' => 'Custom Taxonomies',
-				'menu_title' => 'Taxonomies',
-				'capability' => 'manage_options',
-				'menu_slug'  => 'advait_taxonomies',
-				'callback'   => [$this->callbacks, 'adminTaxonomies']
-			],
+	// 		[
+	// 			'parent_slug' => 'advait_plugin',
+	// 			'page_title' => 'Custom Taxonomies',
+	// 			'menu_title' => 'Taxonomies',
+	// 			'capability' => 'manage_options',
+	// 			'menu_slug'  => 'advait_taxonomies',
+	// 			'callback'   => [$this->callbacks, 'adminTaxonomies']
+	// 		],
 
-			[
-				'parent_slug' => 'advait_plugin',
-				'page_title' => 'Advait Widget',
-				'menu_title' => 'Widget',
-				'capability' => 'manage_options',
-				'menu_slug'  => 'advait_widget',
-				'callback'   => [$this->callbacks, 'adminWidget']
-			]
-		];
-	}
+	// 		[
+	// 			'parent_slug' => 'advait_plugin',
+	// 			'page_title' => 'Advait Widget',
+	// 			'menu_title' => 'Widget',
+	// 			'capability' => 'manage_options',
+	// 			'menu_slug'  => 'advait_widget',
+	// 			'callback'   => [$this->callbacks, 'adminWidget']
+	// 		]
+	// 	];
+	// }
 
 	//admin custom fields
 	//populating settings array
 	public function setSettings()
 	{
 
-		$args = [];
-
-		foreach ($this->managers as $manager=>$title){
-
-			$args[] =  [
+		$args = [
+			[
 				'option_group' => 'advait_settings',
-				'option_name' => $manager,
+				'option_name' => 'advait_plugin',
 				'callback' => [ $this->callbacks_mngr, 'checkBoxSanitize' ]
-			];
-		}
+			]
+		];
 
 		$this->settings->setSettings( $args );
 	}
@@ -139,6 +136,7 @@ class Admin extends BaseController
 				'page' => 'advait_plugin',
 				'section' => 'advait_admin_index', //section name of which the filed belong
 				'args' => [
+					'option_name' => 'advait_plugin',
 					'label_for' => $manager,  //field_id
 					'class' => 'ui-toggle'
 				]

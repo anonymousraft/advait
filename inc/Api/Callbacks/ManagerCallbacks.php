@@ -11,7 +11,12 @@ class ManagerCallbacks extends BaseController
 {
 	public function checkBoxSanitize( $input )
 	{
-		return (isset($input) ? true : false );
+		$output = [];
+
+		foreach ($this->managers as $key => $value){
+			$output[$key] = isset($input[$key]) ? true : false ;
+		}
+		return $output;
 	}
 
 	public function advaitSectionSetting()
@@ -23,9 +28,13 @@ class ManagerCallbacks extends BaseController
 	{
 		$name = $args['label_for'];
 		$classes = $args['class'];
-		$checkBoxValue = esc_attr( get_option($name) );
+		$option_name = $args['option_name'];
 
-		echo '<div class="'. $classes .'"><input type="checkbox" id="'. $name .'" name="'. $name .'" value="1" class="" '. ($checkBoxValue? 'checked': '') .'><label for="'. $name .'"><div></div></label></div>';
+		$checkBoxValue = get_option($option_name);
+
+		$checked = isset($checkBoxValue[$name]) ? ($checkBoxValue[$name] ? true : false) : false;
+
+		echo '<div class="'. $classes .'"><input type="checkbox" id="'. $name .'" name="'. $option_name . '[' . $name .']" value="1" class="" '. ($checked ? 'checked': '') .'><label for="'. $name .'"><div></div></label></div>';
 	}
 
 }
