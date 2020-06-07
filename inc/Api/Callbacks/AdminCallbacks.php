@@ -30,4 +30,33 @@ class AdminCallbacks extends BaseController
 		return require_once("$this->plugin_path/templates/widget.php");
 	}
 
+	public function adminMedia()
+	{
+		return require_once("$this->plugin_path/templates/media.php");
+	}
+
+	public function adminTestimonial()
+	{
+		return require_once("$this->plugin_path/templates/testimonial.php");
+	}
+
+	public function adminTemplateManager()
+	{
+		return require_once("$this->plugin_path/templates/template_manager.php");
+	}
+
+	public function adminLoginManager()
+	{
+		return require_once("$this->plugin_path/templates/login.php");
+	}
+
+	public function adminMembershipManager()
+	{
+		return require_once("$this->plugin_path/templates/membership.php");
+	}
+
+	public function adminChatManager()
+	{
+		return require_once("$this->plugin_path/templates/chat.php");
+	}
 }
